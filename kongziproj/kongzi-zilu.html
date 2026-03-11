@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kongzi - 儒家文化与AI的深度融合</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #f4f1ea;
+            --text-color: #2c2c2c;
+            --light-text: #666666;
+            --accent-color: #c0392b;
+            --accent-hover: #a93226;
+            --card-bg: #ffffff;
+            --border-color: #dcd6cc;
+            --shadow-sm: 0 4px 6px rgba(0,0,0,0.05);
+            --shadow-md: 0 10px 15px rgba(0,0,0,0.08);
+            --shadow-lg: 0 20px 25px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Noto Serif SC", -apple-system, BlinkMacSystemFont, serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            background-image: 
+                linear-gradient(rgba(244, 241, 234, 0.95), rgba(244, 241, 234, 0.95)),
+                url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.1'/%3E%3C/svg%3E");
+        }
+
+        h1, h2, h3 {
+            font-family: "Noto Serif SC", serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* --- 顶部导航栏 --- */
+        .top-nav {
+            width: 100%;
+            padding: 30px 40px;
+            position: absolute; 
+            top: 0;
+            left: 0;
+            z-index: 100;
+            background: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: flex-end;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4a4a4a;
+            font-family: "Noto Serif SC", serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            position: relative;
+            padding-bottom: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* --- Header --- */
+        header {
+            padding: 140px 0 60px;
+            text-align: center;
+        }
+
+        .header-flex-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .logo {
+            max-width: 140px;
+            min-height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            filter: sepia(0.2) contrast(1.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .title-wrapper {
+            text-align: left;
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 5rem;
+            margin-bottom: 0;
+            line-height: 1;
+            color: #1a1a1a;
+            font-family: "Ma Shan Zheng", cursive;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.05);
+        }
+
+        .seal {
+            position: absolute;
+            top: -15px;
+            right: -45px;
+            width: 40px;
+            height: 40px;
+            border: 2px solid #d63031;
+            border-radius: 4px;
+            color: #d63031;
+            font-size: 14px;
+            line-height: 16px;
+            padding: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            writing-mode: vertical-rl;
+            font-family: "Ma Shan Zheng", cursive;
+            opacity: 0.8;
+            transform: rotate(15deg);
+            pointer-events: none;
+            background: rgba(255,255,255,0.2);
+            box-shadow: inset 0 0 0 1px #d63031;
+        }
+        
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--light-text);
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 28px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: #fff;
+            border: 1px solid var(--accent-color);
+            box-shadow: 0 4px 10px rgba(192, 57, 43, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--text-color);
+            border: 1px solid #aaa;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--text-color);
+            background-color: rgba(0,0,0,0.05);
+        }
+
+        /* --- Authors --- */
+        .authors {
+            padding: 40px 0;
+            border-top: 1px solid rgba(0,0,0,0.06);
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            background: rgba(255,255,255,0.3);
+            text-align: center;
+        }
+
+        .author-line {
+            display: block; 
+            margin-bottom: 8px;
+            font-size: 1.35rem;
+            color: #444;
+            line-height: 1.5;
+        }
+        
+        .author-line:last-child {
+            margin-bottom: 0;
+        }
+
+        .author-line span {
+            display: inline-block;
+            white-space: nowrap;
+        }
+
+        /* --- Features --- */
+        .features {
+            padding: 80px 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        @media (min-width: 1024px) {
+            .features-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 32px;
+            border-radius: 2px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-md);
+            border-color: #d0c8be;
+        }
+
+        .feature-card::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--accent-color);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .feature-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 16px;
+            color: #1a1a1a;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 1rem;
+            text-align: justify;
+            line-height: 1.7;
+        }
+
+        /* --- Demo --- */
+        .demo {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            font-family: "Ma Shan Zheng", cursive;
+        }
+
+        .model-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            gap: 15px;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            padding: 10px 30px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: "Noto Serif SC", serif;
+            font-size: 1.15rem;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active {
+            background: var(--accent-color);
+            color: #fff;
+            border-color: var(--accent-color);
+            box-shadow: 0 4px 10px rgba(192, 57, 43, 0.2);
+        }
+
+        .tab-btn:hover:not(.active) {
+            border-color: #999;
+            color: #333;
+        }
+
+        .chat-container {
+            max-width: 1000px;
+            width: 92%;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            background: #fdfdfd;
+            padding: 18px 24px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot { width: 12px; height: 12px; border-radius: 50%; background: #ddd; }
+        .dot.red { background: #ff5f56; }
+        .dot.yellow { background: #ffbd2e; }
+        .dot.green { background: #27c93f; }
+
+        .chat-body {
+            padding: 40px;
+            background: #fafafa;
+            min-height: 500px;
+            display: none; 
+            flex-direction: column;
+            gap: 24px;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .chat-body.active-body {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 18px 22px;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            position: relative;
+        }
+
+        .message.user {
+            align-self: flex-end;
+            background: var(--text-color);
+            color: #fff;
+            border-bottom-right-radius: 2px;
+        }
+
+        .message.ai {
+            align-self: flex-start;
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            color: #333;
+            border-bottom-left-radius: 2px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+        
+        .message.ai strong {
+            color: var(--accent-color);
+        }
+
+        /* --- Footer & Quote --- */
+        .quote-section {
+            padding: 100px 0;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(192, 57, 43, 0.03) 0%, transparent 70%);
+        }
+
+        .quote-section blockquote {
+            font-family: "Ma Shan Zheng", cursive;
+            font-size: 2.5rem;
+            color: #1a1a1a;
+            margin-bottom: 24px;
+            line-height: 1.4;
+        }
+
+        .source {
+            font-size: 1.1rem;
+            color: #888;
+            font-style: italic;
+        }
+
+        footer {
+            padding: 40px 0;
+            background: #eeebe4;
+            color: #777;
+            text-align: center;
+            font-size: 0.9rem;
+            border-top: 1px solid #dcd6cc;
+        }
+
+        @media (max-width: 768px) {
+            .top-nav { padding: 20px; }
+            .nav-links { justify-content: center; gap: 20px; font-size: 0.9rem; }
+            .header-flex-group { flex-direction: column; gap: 10px; }
+            header h1 { font-size: 3.5rem; }
+            .hero-buttons { flex-direction: column; padding: 0 40px; }
+            .btn { width: 100%; justify-content: center; }
+            .author-line { font-size: 1.1rem; }
+            .chat-body { padding: 20px; min-height: 400px; }
+            .message { max-width: 95%; font-size: 0.95rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="top-nav">
+        <div class="nav-links">
+            <a href="javascript:void(0)" onclick="navigateToModel('kongzi')">孔子</a>
+            <a href="javascript:void(0)" onclick="navigateToModel('zilu')">子路</a>
+            <a href="#team">团队</a>
+            <a href="https://github.com/yang-jiashu/Kongzi" target="_blank">GITHUB &rarr;</a>
+        </div>
+    </nav>
+
+    <header>
+        <div class="container header-content">
+            <div class="header-flex-group">
+                <img src="kongzi.png" alt="Kongzi Logo" class="logo" onerror="this.style.display='none'">
+                
+                <div class="title-wrapper">
+                    <h1>Kongzi</h1>
+                    <div class="seal">仁义<br>礼智</div>
+                </div>
+            </div>
+            
+            <p class="subtitle">融合儒家经典智慧与现代人工智能的古文大语言模型</p>
+
+            <div class="hero-buttons">
+                <a href="#" class="btn btn-outline">📄 查看论文 (Paper)</a>
+                <a href="https://github.com/yang-jiashu/Kongzi" class="btn btn-primary">★ Star on GitHub</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="authors" id="team">
+        <div class="container">
+            <div class="author-list">
+                <div class="author-line">
+                    <span>Jiashu Yang</span>, 
+                    <span>Ningning Wang</span>, 
+                    <span>Yian Zhao</span>, 
+                    <span>Chaoran Feng</span>,
+                </div>
+                <div class="author-line">
+                    <span>Jinhao Yu</span>, 
+                    <span>Hao Pang</span>, 
+                    <span>Junjia Du</span>, 
+                    <span>Xuxin Cheng</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>⚖️ 礼法 · 价值观</h3>
+                    <p>内嵌儒家核心价值观对齐。模型在生成内容时，会自然体现"仁义礼智信"的道德规范，减少有害输出。</p>
+                </div>
+                <div class="feature-card">
+                    <h3>☯️ 天人 · 推理</h3>
+                    <p>借鉴"天人合一"的系统观，增强了模型在复杂逻辑推理中的上下文关联能力，提升长文本理解表现。</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📖 子路 · 翻译</h3>
+                    <p>专为古籍优化的翻译引擎。基于海量典籍数据微调，能够实现古文与现代汉语之间的高精度互译，不仅传意，更传神。</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🚀 易用 · 部署</h3>
+                    <p>开箱即用。提供完整的 HuggingFace 权重、微调脚本及 Docker 环境，支持 4-bit 量化，消费级显卡即可运行。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="demo" id="demo-section">
+        <div class="container">
+            <h2 class="section-title">模型展示</h2>
+            
+            <div class="model-tabs">
+                <button class="tab-btn active" onclick="switchModel('kongzi')">孔子 (对话模式)</button>
+                <button class="tab-btn" onclick="switchModel('zilu')">子路 (翻译模式)</button>
+            </div>
+
+            <div class="chat-container">
+                <div class="chat-header">
+                    <div class="dot red"></div>
+                    <div class="dot yellow"></div>
+                    <div class="dot green"></div>
+                </div>
+
+                <div id="chat-kongzi" class="chat-body active-body">
+                    <div class="message user">
+                        请解释“逝者如斯夫，不舍昼夜”的含义，并结合现代生活举例。
+                    </div>
+                    <div class="message ai">
+                        <strong>Kongzi:</strong> 这句话出自《论语·子罕》，是孔子在河边感叹时光像流水一样不断流逝，日夜不停。<br><br>
+                        <strong>含义：</strong>它既表达了对时光飞逝的无奈与感叹，更包含着一种积极进取的人生态度——既然时间不可留，我们更应珍惜当下，不断进取。<br><br>
+                        <strong>现代启示：</strong>在快节奏的现代生活中，我们常感叹由于忙碌而错过了陪伴家人的时间（逝者如斯）。但正因如此，我们才应该在有限的周末放下手机，高质量地陪伴亲友，或利用碎片时间坚持学习一项新技能（不舍昼夜），不让时间虚度。
+                    </div>
+                </div>
+
+                <div id="chat-zilu" class="chat-body">
+                    <div class="message user">
+                        [古文] 滕王高阁临江渚，佩玉鸣鸾罢歌舞。画栋朝飞南浦云，珠帘暮卷西山雨。
+                    </div>
+                    <div class="message ai">
+                        <strong>Zilu:</strong><br>
+                        【现代文翻译】<br>
+                        高高的滕王阁耸立在江边的沙洲旁，佩玉的鸣鸾声停止了，歌舞也结束了。<br>
+                        早晨，画栋飞出了南浦的云；傍晚，珠帘卷起了西山的雨。<br><br>
+                        【解析】<br>
+                        此句出自王勃《滕王阁诗》。<br>
+                        <strong>"临江渚"</strong>：准确描绘了滕王阁地理位置的高峻与视野的开阔。<br>
+                        <strong>"罢歌舞"</strong>：与昔日的繁华形成对比，流露出繁华落尽、世事无常的苍凉感。
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="quote-section">
+        <div class="container">
+            <blockquote>"温故而知新，可以为师矣。"</blockquote>
+            <p class="source">—— 孔子《论语·为政》</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Kongzi Project. Built with 🍵 & Code.</p>
+        </div>
+    </footer>
+
+    <script>
+        function navigateToModel(modelName) {
+            switchModel(modelName);
+            const demoSection = document.getElementById('demo-section');
+            if (demoSection) {
+                demoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        function switchModel(modelName) {
+            const tabs = document.querySelectorAll('.tab-btn');
+            const bodies = document.querySelectorAll('.chat-body');
+
+            tabs.forEach(tab => tab.classList.remove('active'));
+            bodies.forEach(body => body.classList.remove('active-body'));
+
+            if (modelName === 'kongzi') {
+                tabs[0].classList.add('active');
+                document.getElementById('chat-kongzi').classList.add('active-body');
+            } else if (modelName === 'zilu') {
+                tabs[1].classList.add('active');
+                document.getElementById('chat-zilu').classList.add('active-body');
+            }
+        }
+    </script>
+</body>
+</html>
