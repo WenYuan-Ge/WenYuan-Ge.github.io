@@ -17,7 +17,7 @@
 
 ## 社区成员
 
-- **Jiashu Yang**: 北京大学博士
+- **Jiashu Yang**: Project Leader
 - **Ningning Wang**: 中国科学技术大学硕士
 - **Yian Zhao**: 北京大学博士
 - **Chaoran Feng**: 北京大学博士
