@@ -15,17 +15,6 @@
 - **Kongzi (孔子)**: 具有事实增强能力的开源历史大语言模型。
 - **Zilu (子路)**: 专注于古汉语理解与生成的对话大语言模型。
 
-## 社区成员
-
-- **Jiashu Yang**: 北京大学博士
-- **Ningning Wang**: 中国科学技术大学硕士
-- **Yian Zhao**: 北京大学博士
-- **Chaoran Feng**: 北京大学博士
-- **Jinhao Yu**: 复旦大学硕士
-- **Hao Pang**: 大连理工大学硕士
-- **Junjia Du**: 南洋理工大学硕士
-- **Lingxu Chen**: 北京大学硕士
-
 ## 联系我们
 
 - GitHub: [yang-jiashu](https://github.com/yang-jiashu)
