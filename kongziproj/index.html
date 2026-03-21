@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kongzi - 儒家文化与AI的融合</title>
+    <style>
+        :root {
+            --bg-color: #f4f1ea; /* 宣纸色 */
+            --text-color: #2c2c2c; /* 墨色 */
+            --accent-color: #c0392b; /* 朱红 */
+            --secondary-bg: #e8e4dc;
+            --card-bg: #ffffff;
+            --border-color: #dcd6cc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.8;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            /* 添加纸张纹理效果 */
+            background-image: linear-gradient(var(--bg-color) 2px, transparent 2px),
+            linear-gradient(90deg, var(--bg-color) 2px, transparent 2px),
+            linear-gradient(var(--bg-color) 1px, transparent 1px),
+            linear-gradient(90deg, var(--bg-color) 1px, transparent 1px);
+            background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
+            background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header 设计 */
+        header {
+            padding: 80px 0 60px;
+            text-align: center;
+            position: relative;
+        }
+
+        header::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 30px auto 0;
+            border-radius: 2px;
+        }
+
+        .logo {
+            max-width: 180px;
+            margin-bottom: 20px;
+            filter: sepia(0.2); /* 让logo稍微带点复古感 */
+        }
+
+        .header-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+            letter-spacing: 2px;
+        }
+
+        /* Authors 区域设计 */
+        .authors {
+            padding: 40px 0;
+            background: transparent;
+            text-align: center;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .author-names {
+            font-size: 1.4rem;
+            margin-bottom: 0;
+            line-height: 1.8;
+            font-family: "Noto Serif SC", serif; /* 人名也用衬线体显得更正式 */
+            color: #444;
+        }
+
+        .author-names span {
+            display: inline-block;
+            margin: 0 8px;
+            position: relative;
+        }
+        
+        /* 特性卡片设计 */
+        .features {
+            padding: 80px 0;
+            background: transparent;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .feature-card {
+            padding: 30px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            position: relative;
+            transition: all 0.3s ease;
+            /* 中式边框装饰 */
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.05);
+        }
+
+        .feature-card::before {
+            content: "";
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            right: 4px;
+            bottom: 4px;
+            border: 1px solid rgba(0,0,0,0.05);
+            pointer-events: none;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 8px 8px 0 rgba(192, 57, 43, 0.1);
+            border-color: var(--accent-color);
+        }
+
+        .feature-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+            border-bottom: 2px solid var(--secondary-bg);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .feature-card p {
+            color: #555;
+            font-size: 1.05rem;
+            text-align: justify;
+        }
+
+        /* Demo 区域 */
+        .demo {
+            padding: 60px 0;
+            background: rgba(255,255,255,0.5);
+        }
+
+        .demo-content h2 {
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .demo-image {
+            max-width: 100%;
+            border-radius: 4px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border: 8px solid white;
+            min-height: 200px;
+            background: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+        }
+
+        /* Quote Section 区域 */
+        .quote-section {
+            padding: 100px 0;
+            background: transparent;
+            text-align: center;
+            position: relative;
+        }
+
+        .quote-section blockquote {
+            font-family: "Noto Serif SC", "Songti SC", serif;
+            font-size: 2.2rem;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .quote-section .source {
+            font-size: 1.1rem;
+            color: #888;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .text-link {
+            display: inline-block;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s ease;
+            font-family: "Noto Serif SC", serif;
+        }
+
+        .text-link:hover {
+            border-bottom-color: var(--accent-color);
+            opacity: 0.8;
+        }
+
+        footer {
+            padding: 40px 0;
+            background: var(--bg-color);
+            color: #666;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .author-names {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <img src="kongzi.png" alt="Kongzi Logo" class="logo">
+            <h1>Kongzi</h1>
+        </div>
+    </header>
+
+    <section class="authors">
+        <div class="container">
+            <div class="author-list">
+                <div class="author-info">
+                    <p class="author-names">
+                        <span>Jiashu Yang, Ningning Wang, Yian Zhao, Chaoran Feng,</span>
+                        <span>Jinhao Yu, Hao Pang, Junjia Du, Xuxin Cheng</span>
+                    </p>
+                    <div class="author-affiliations">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <div class="features-grid">
+
+                <div class="feature-card">
+                    <h3>子路 (古文翻译大模型)</h3>
+                    <p>基于先进的自然语言处理技术，专注于古文与现代汉语的精准互译，帮助用户轻松理解和学习经典文献。</p>
+                </div>
+                <div class="feature-card">
+                    <h3>礼法教化</h3>
+                    <p>强调通过礼法教化来规范人的行为，建立社会秩序，实现个人修养与社会和谐。</p>
+                </div>
+                <div class="feature-card">
+                    <h3>天人之分</h3>
+                    <p>提出"天人之分"的哲学观点，主张人应该认识自然规律并积极改造自然。</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>易于使用</h3>
+                    <p>提供完整的训练和推理代码，支持多种部署方式，方便研究人员和开发者使用。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="demo">
+        <div class="container demo-content">
+            <h2>效果展示</h2>
+            <div class="demo-image">
+                <!-- 这里可以放置检测效果的示例图片或动图 -->
+            </div>
+        </div>
+    </section>
+
+    <section class="quote-section">
+        <div class="container">
+            <blockquote>"温故而知新，可以为师矣。"</blockquote>
+            <p class="source">—— 孔子《论语·为政》</p>
+            <div>
+                <a href="https://github.com/yang-jiashu/Kongzi" class="text-link">访问 GitHub 仓库 →</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2025 Kongzi. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
