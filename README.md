@@ -17,6 +17,6 @@
 
 ## 联系我们
 
-- GitHub: [yang-jiashu](https://github.com/yang-jiashu)
+- GitHub: [wenyuange](https://github.com/Yang-Jiashu/wenyuange)
 - Hugging Face: [Kongzi-LLM](https://huggingface.co/Kongzi-LLM)
 - 个人主页: [https://yang-jiashu.github.io/](https://yang-jiashu.github.io/)
